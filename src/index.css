@@ -1,0 +1,520 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* F1 Theme - Single Color Scheme */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+
+    --primary: 0 84% 56%; /* F1 Red */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 8%;
+
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 0 84% 95%; /* Light F1 Red */
+    --accent-foreground: 0 0% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 84% 56%;
+
+    /* F1 Brand Colors */
+    --f1-red: 0 84% 56%;
+    --f1-black: 0 0% 8%;
+    --f1-silver: 0 0% 75%;
+    --f1-white: 0 0% 100%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 84% 56%; /* F1 Red */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 84% 56%;
+
+    /* F1 Brand Colors - Dark Mode */
+    --f1-red: 0 84% 56%;
+    --f1-black: 0 0% 8%;
+    --f1-silver: 0 0% 60%;
+    --f1-white: 0 0% 95%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sf-pro-text;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Typography enhancements */
+.text-hero {
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.text-section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* F1-inspired gradient backgrounds */
+.gradient-bg {
+  background: linear-gradient(135deg, hsl(var(--f1-red)) 0%, hsl(var(--f1-black)) 100%);
+}
+
+/* Racing stripe effects */
+.racing-stripes {
+  background: repeating-linear-gradient(
+    45deg,
+    hsl(var(--f1-red)),
+    hsl(var(--f1-red)) 10px,
+    hsl(var(--f1-black)) 10px,
+    hsl(var(--f1-black)) 20px
+  );
+}
+
+/* Checkered flag pattern */
+.checkered-bg {
+  background-image: 
+    linear-gradient(45deg, hsl(var(--f1-black)) 25%, transparent 25%), 
+    linear-gradient(-45deg, hsl(var(--f1-black)) 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, hsl(var(--f1-black)) 75%), 
+    linear-gradient(-45deg, transparent 75%, hsl(var(--f1-black)) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+@layer components {
+  /* Enhanced F1 Button with better light theme hover */
+  .f1-button {
+    @apply bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2 px-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .f1-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .f1-button:hover::before {
+    left: 100%;
+  }
+
+  .f1-button-outline {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold py-2 px-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .f1-button-outline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+
+  .f1-button-outline:hover::before {
+    left: 100%;
+  }
+
+  /* Enhanced F1 Card with better light theme hover and text visibility */
+  .f1-card {
+    @apply bg-card border border-border shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+  }
+
+  .f1-card:hover {
+    border-color: hsl(var(--primary));
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  /* Light theme specific hover improvements with better text visibility */
+  .light .f1-card:hover {
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--primary)/0.03) 100%);
+    box-shadow: 0 20px 40px rgba(227, 30, 36, 0.08);
+  }
+
+  .light .f1-card:hover::before {
+    opacity: 0.05;
+  }
+
+  /* Dark theme specific hover improvements */
+  .dark .f1-card:hover {
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--primary)/0.1) 100%);
+    box-shadow: 0 20px 40px rgba(227, 30, 36, 0.3);
+  }
+
+  /* Enhanced F1 Section */
+  .f1-section {
+    @apply bg-background text-foreground;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Enhanced F1 Hero Background with better text visibility */
+  .f1-hero-bg {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .f1-hero-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 20%, hsl(var(--f1-red)) 0%, hsl(var(--f1-red)) 1%, transparent 1%),
+      radial-gradient(circle at 80% 80%, hsl(var(--f1-red)) 0%, hsl(var(--f1-red)) 1%, transparent 1%),
+      radial-gradient(circle at 40% 60%, hsl(var(--f1-black)) 0%, hsl(var(--f1-black)) 1%, transparent 1%);
+    background-size: 100px 100px, 150px 150px, 80px 80px;
+    opacity: 0.05;
+    animation: f1-float 20s ease-in-out infinite;
+  }
+
+  .dark .f1-hero-bg {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--card)) 100%);
+  }
+
+  .dark .f1-hero-bg::before {
+    opacity: 0.03;
+  }
+
+  /* F1 Section Backgrounds with enhanced patterns and better text visibility */
+  .f1-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 10% 10%, hsl(var(--f1-red)) 0%, hsl(var(--f1-red)) 0.5%, transparent 0.5%),
+      radial-gradient(circle at 90% 90%, hsl(var(--f1-red)) 0%, hsl(var(--f1-red)) 0.5%, transparent 0.5%),
+      radial-gradient(circle at 50% 50%, hsl(var(--f1-black)) 0%, hsl(var(--f1-black)) 0.3%, transparent 0.3%);
+    background-size: 200px 200px, 300px 300px, 150px 150px;
+    opacity: 0.02;
+    pointer-events: none;
+  }
+
+  .dark .f1-section::before {
+    opacity: 0.03;
+  }
+
+  /* Enhanced F1 Card Hover Effects with better text visibility */
+  .f1-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, hsl(var(--f1-red)), hsl(var(--f1-black)), hsl(var(--f1-red)));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .f1-card:hover::before {
+    opacity: 0.2;
+    animation: f1-border-glow 2s ease-in-out infinite;
+  }
+
+  /* Enhanced hover effects for light theme with better text visibility */
+  .light .f1-card:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 
+      0 10px 25px rgba(227, 30, 36, 0.06),
+      0 5px 10px rgba(0, 0, 0, 0.03);
+  }
+
+  .light .f1-card:hover::before {
+    opacity: 0.1;
+  }
+
+  /* Enhanced hover effects for dark theme */
+  .dark .f1-card:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 
+      0 10px 25px rgba(227, 30, 36, 0.3),
+      0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .dark .f1-card:hover::before {
+    opacity: 0.3;
+  }
+}
+
+/* F1 Background Patterns */
+
+/* F1 Wheel Rim Pattern */
+.f1-wheel-rim {
+  background-image: 
+    radial-gradient(circle at 50% 50%, transparent 30%, hsl(var(--f1-red)) 30%, hsl(var(--f1-red)) 35%, transparent 35%),
+    radial-gradient(circle at 50% 50%, transparent 40%, hsl(var(--f1-black)) 40%, hsl(var(--f1-black)) 45%, transparent 45%),
+    radial-gradient(circle at 50% 50%, transparent 50%, hsl(var(--f1-red)) 50%, hsl(var(--f1-red)) 55%, transparent 55%);
+  background-size: 100px 100px, 120px 120px, 140px 140px;
+  background-position: center;
+}
+
+/* F1 Steering Wheel Pattern */
+.f1-steering-wheel {
+  background-image: 
+    radial-gradient(circle at 50% 50%, transparent 40%, hsl(var(--f1-red)) 40%, hsl(var(--f1-red)) 45%, transparent 45%),
+    radial-gradient(circle at 50% 50%, transparent 50%, hsl(var(--f1-black)) 50%, hsl(var(--f1-black)) 55%, transparent 55%),
+    radial-gradient(circle at 50% 50%, transparent 60%, hsl(var(--f1-red)) 60%, hsl(var(--f1-red)) 65%, transparent 65%);
+  background-size: 80px 80px, 100px 100px, 120px 120px;
+  background-position: center;
+}
+
+/* F1 Car Silhouette Pattern */
+.f1-car-silhouette {
+  background-image: 
+    linear-gradient(45deg, transparent 40%, hsl(var(--f1-red)) 40%, hsl(var(--f1-red)) 45%, transparent 45%),
+    linear-gradient(-45deg, transparent 40%, hsl(var(--f1-red)) 40%, hsl(var(--f1-red)) 45%, transparent 45%),
+    linear-gradient(90deg, transparent 30%, hsl(var(--f1-black)) 30%, hsl(var(--f1-black)) 35%, transparent 35%);
+  background-size: 200px 100px, 200px 100px, 100px 200px;
+  background-position: 0% 0%, 100% 100%, 50% 50%;
+}
+
+/* F1 Tire Tread Pattern */
+.f1-tire-tread {
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 10px,
+      hsl(var(--f1-red)) 10px,
+      hsl(var(--f1-red)) 15px,
+      transparent 15px,
+      transparent 25px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 10px,
+      hsl(var(--f1-black)) 10px,
+      hsl(var(--f1-black)) 15px,
+      transparent 15px,
+      transparent 25px
+    );
+  background-size: 50px 50px;
+}
+
+/* F1 Circuit Pattern */
+.f1-circuit {
+  background-image: 
+    linear-gradient(45deg, transparent 40%, hsl(var(--f1-red)) 40%, hsl(var(--f1-red)) 45%, transparent 45%),
+    linear-gradient(-45deg, transparent 40%, hsl(var(--f1-red)) 40%, hsl(var(--f1-red)) 45%, transparent 45%),
+    radial-gradient(circle at 25% 25%, hsl(var(--f1-black)) 0%, hsl(var(--f1-black)) 5%, transparent 5%),
+    radial-gradient(circle at 75% 75%, hsl(var(--f1-black)) 0%, hsl(var(--f1-black)) 5%, transparent 5%);
+  background-size: 100px 100px, 100px 100px, 50px 50px, 50px 50px;
+  background-position: 0% 0%, 100% 100%, 25% 25%, 75% 75%;
+}
+
+/* F1 Pit Lane Pattern */
+.f1-pit-lane {
+  background-image: 
+    linear-gradient(90deg, hsl(var(--f1-red)) 0%, hsl(var(--f1-red)) 10%, transparent 10%, transparent 20%),
+    linear-gradient(0deg, hsl(var(--f1-black)) 0%, hsl(var(--f1-black)) 2%, transparent 2%, transparent 4%);
+  background-size: 40px 20px, 20px 40px;
+}
+
+/* F1 Grid Pattern */
+.f1-grid {
+  background-image: 
+    linear-gradient(90deg, hsl(var(--f1-red)) 0%, hsl(var(--f1-red)) 1%, transparent 1%, transparent 20%),
+    linear-gradient(0deg, hsl(var(--f1-red)) 0%, hsl(var(--f1-red)) 1%, transparent 1%, transparent 20%);
+  background-size: 20px 20px;
+}
+
+/* F1 Floating Animation */
+@keyframes f1-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(10px) rotate(270deg);
+  }
+}
+
+@keyframes f1-border-glow {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* F1 Loading Spinner */
+.f1-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid hsl(var(--muted));
+  border-top: 4px solid hsl(var(--f1-red));
+  border-radius: 50%;
+  animation: f1-spin 1s linear infinite;
+}
+
+@keyframes f1-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* F1 Progress Bar */
+.f1-progress {
+  background: linear-gradient(90deg, hsl(var(--f1-red)) 0%, hsl(var(--f1-black)) 100%);
+  height: 4px;
+  border-radius: 2px;
+  animation: f1-progress-pulse 2s ease-in-out infinite;
+}
+
+@keyframes f1-progress-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Enhanced gradient text for better visibility */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(var(--f1-red)) 0%, hsl(var(--f1-black)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Enhanced focus states for better accessibility */
+.f1-button:focus,
+.f1-button-outline:focus {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Enhanced selection colors */
+::selection {
+  background: hsl(var(--primary)/0.3);
+  color: hsl(var(--foreground));
+}
+
+::-moz-selection {
+  background: hsl(var(--primary)/0.3);
+  color: hsl(var(--foreground));
+}
+
